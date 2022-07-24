@@ -22,4 +22,21 @@ public class PlayerController : MonoBehaviour
 
         transform.position += moveDirection*speed/100f;
     }
+
+    // private void OnTriggerEnter(Collider other) 
+    // {
+    //     if(other.CompareTag("Ground"))
+    //     {
+    //         other.GetComponent<BoxCollider>().isTrigger =false;
+    //     }    
+    // }
+
+    private void OnCollisionEnter(Collision other) 
+    {
+        if(other.gameObject.CompareTag("Ground"))
+        {
+            Debug.Log("point");
+            ++GameManager.Instance.Score;
+        }
+    }
 }
