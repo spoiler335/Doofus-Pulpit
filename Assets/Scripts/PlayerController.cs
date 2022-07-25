@@ -5,11 +5,13 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] float speed =8f;
+    [SerializeField] GameObject gameOverPanel;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameOverPanel.SetActive(false);
+        Time.timeScale = 1f;
     }
 
     // Update is called once per frame
@@ -21,15 +23,15 @@ public class PlayerController : MonoBehaviour
         Vector3 moveDirection = new Vector3 (xDirection,0f,zDirection);
 
         transform.position += moveDirection*speed/100f;
+
+        if(transform.position.y < 0.7f)
+        {
+            gameOverPanel.SetActive(true);
+            Time.timeScale =0f;
+        }
     }
 
-    // private void OnTriggerEnter(Collider other) 
-    // {
-    //     if(other.CompareTag("Ground"))
-    //     {
-    //         other.GetComponent<BoxCollider>().isTrigger =false;
-    //     }    
-    // }
+    
 
     private void OnCollisionEnter(Collision other) 
     {
@@ -37,6 +39,8 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("point");
             ++GameManager.Instance.Score;
+
+            GameManager.highestScore = Mathf.Max(GameManager.Instance.Score, GameManager.highestScore);
         }
     }
 }

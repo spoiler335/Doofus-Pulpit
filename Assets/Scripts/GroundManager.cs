@@ -6,6 +6,8 @@ public class GroundManager : MonoBehaviour
 {
 
     [SerializeField] GameObject groundPrefab;
+
+    public static int floorCount=1;
     
     // Start is called before the first frame update
     void Start()
@@ -16,14 +18,39 @@ public class GroundManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       // StartCoroutine(spawnFloor());
-       Invoke("spawnFloor",2f);
-    
+       
+       if(floorCount < 2)
+       {
+            //spawnFloor();
+            //StartCoroutine(spawnFloor());
+            int randInt = Random.Range(0, 4);
+             //Debug.Log(randInt);
+            if(randInt == 0)
+            {
+                spawnForwards();
+            }
+
+            else if (randInt == 1)
+            {
+                spawnBackwards();
+            }
+
+            else if (randInt == 2)
+            {
+                spawanLeft();
+            }
+
+            else if (randInt == 3)
+            {
+                spawnRight();
+            }
+       }
     }
 
-    void spawnFloor()
+    IEnumerator spawnFloor()
     {
-        //yield return new WaitForSeconds(2f);
+        
+        yield return new WaitForSeconds(2f);
         int randInt = Random.Range(0, 4);
         //Debug.Log(randInt);
         if(randInt == 0)
@@ -45,7 +72,8 @@ public class GroundManager : MonoBehaviour
         {
             spawnRight();
         }
-        //yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(2f);
+        
     }
 
 
@@ -54,6 +82,7 @@ public class GroundManager : MonoBehaviour
         Vector3 newPos = new Vector3(transform.position.x , transform.position.y, transform.position.z+9f);
         transform.position = newPos;
         Instantiate(groundPrefab, newPos, transform.rotation);
+        ++floorCount;
     }
 
     void spawnBackwards()
@@ -61,6 +90,7 @@ public class GroundManager : MonoBehaviour
         Vector3 newPos = new Vector3(transform.position.x , transform.position.y, transform.position.z-9f);
         transform.position = newPos;
         Instantiate(groundPrefab, newPos, transform.rotation);
+        ++floorCount;
     }
 
     void spawanLeft()
@@ -68,6 +98,7 @@ public class GroundManager : MonoBehaviour
         Vector3 newPos = new Vector3(transform.position.x - 9f, transform.position.y, transform.position.z);
         transform.position = newPos;
         Instantiate(groundPrefab, newPos, transform.rotation);
+        ++floorCount;
     }
 
     void spawnRight()
@@ -75,6 +106,7 @@ public class GroundManager : MonoBehaviour
         Vector3 newPos = new Vector3(transform.position.x + 9f, transform.position.y, transform.position.z);
         transform.position = newPos;
         Instantiate(groundPrefab, newPos, transform.rotation);
+        ++floorCount;
     }
 
 }
