@@ -22,28 +22,28 @@ public class GroundManager : MonoBehaviour
        if(floorCount < 2)
        {
             //spawnFloor();
-            //StartCoroutine(spawnFloor());
+            StartCoroutine(spawnFloor());
             int randInt = Random.Range(0, 4);
              //Debug.Log(randInt);
-            if(randInt == 0)
-            {
-                spawnForwards();
-            }
+            // if(randInt == 0)
+            // {
+            //     spawnForwards();
+            // }
 
-            else if (randInt == 1)
-            {
-                spawnBackwards();
-            }
+            // else if (randInt == 1)
+            // {
+            //     spawnBackwards();
+            // }
 
-            else if (randInt == 2)
-            {
-                spawanLeft();
-            }
+            // else if (randInt == 2)
+            // {
+            //     spawanLeft();
+            // }
 
-            else if (randInt == 3)
-            {
-                spawnRight();
-            }
+            // else if (randInt == 3)
+            // {
+            //     spawnRight();
+            // }
        }
     }
 
@@ -72,7 +72,7 @@ public class GroundManager : MonoBehaviour
         {
             spawnRight();
         }
-        yield return new WaitForSeconds(2f);
+        //yield return new WaitForSeconds(2f);
         
     }
 
